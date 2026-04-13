@@ -41,6 +41,20 @@ class EventCreatedResponse(BaseModel):
     message: str
 
 
+class SendRequest(BaseModel):
+    url: str
+    payload: dict[str, Any] = {}
+    method: str = "POST"
+    headers: dict[str, str] = {}
+
+
+class SendResponse(BaseModel):
+    status_code: int
+    body: str
+    elapsed_ms: float
+    ok: bool
+
+
 class SourceStats(BaseModel):
     source: str
     count: int
