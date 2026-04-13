@@ -190,7 +190,7 @@ _LANDING_HTML = """<!DOCTYPE html>
 <body>
 <div class="terminal">
   <div class="title">WEBHOOK LOGGER</div>
-  <div class="subtitle">ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM &mdash; COPYRIGHT 2075-2077</div>
+  <div class="subtitle">BUILT BY FEDERICO MOROZ &mdash; BACKEND PORTFOLIO PROJECT</div>
 
   <div class="line ok"><span class="label">SYSTEM STATUS &nbsp;&nbsp;&nbsp;</span><span class="value">ONLINE</span></div>
   <div class="line ok"><span class="label">DATABASE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="value">CONNECTED</span></div>
@@ -298,7 +298,7 @@ def landing_page(db: Session = Depends(get_db)):
 async def custom_swagger_ui():
     return get_swagger_ui_html(
         openapi_url="/openapi.json",
-        title="ROBCO INDUSTRIES // WEBHOOK LOGGER",
+        title="WEBHOOK LOGGER // FEDERICO MOROZ",
         swagger_css_url="/static/terminal.css",
     )
 

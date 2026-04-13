@@ -38,7 +38,7 @@ body::after {
 .swagger-ui .topbar .download-url-wrapper { display: none !important; }
 .swagger-ui .topbar-wrapper img { display: none !important; }
 .swagger-ui .topbar-wrapper::before {
-  content: "ROBCO INDUSTRIES  //  WEBHOOK LOGGER  //  v1.0";
+  content: "WEBHOOK LOGGER  //  FEDERICO MOROZ  //  v1.0";
   color: var(--g-mid);
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.8rem;
