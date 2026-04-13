@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --g-hi:   #39ff14;   /* titles, active */
-  --g-mid:  #20c020;   /* paths, values  */
-  --g-dim:  #147814;   /* descriptions, labels */
-  --g-mute: #0d500d;   /* borders, dividers */
+  --g-hi:   #39ff14;
+  --g-mid:  #20c020;
+  --g-dim:  #147814;
+  --g-mute: #0d500d;
   --bg:     #080808;
   --bg-alt: #0c0f0c;
   --glow:   0 0 10px #39ff1466, 0 0 2px #39ff1488;
@@ -15,9 +15,10 @@
 html, body {
   background: var(--bg);
   font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+  color: var(--g-mid);
 }
 
-/* CRT scanlines — subtle */
+/* CRT scanlines */
 body::after {
   content: "";
   position: fixed; inset: 0;
@@ -29,20 +30,110 @@ body::after {
   z-index: 10000;
 }
 
-/* ── Top bar ── */
-.swagger-ui .topbar {
-  background: #000 !important;
-  border-bottom: 1px solid var(--g-mute) !important;
-  padding: 10px 24px !important;
+/* ── Custom topbar (docs page) ── */
+#docs-topbar {
+  position: sticky; top: 0; z-index: 500;
+  background: #000;
+  border-bottom: 1px solid var(--g-mute);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 24px;
 }
-.swagger-ui .topbar .download-url-wrapper { display: none !important; }
-.swagger-ui .topbar-wrapper img { display: none !important; }
-.swagger-ui .topbar-wrapper::before {
-  content: "WEBHOOK LOGGER  //  FEDERICO MOROZ  //  v1.0";
-  color: var(--g-mid);
+#back-btn {
+  color: var(--g-dim);
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border: 1px solid var(--g-mute);
+  padding: 4px 12px;
+  transition: all 0.1s;
+}
+#back-btn:hover {
+  color: var(--g-hi);
+  border-color: var(--g-dim);
+  background: rgba(57,255,20,0.05);
+}
+#docs-title {
+  color: var(--g-dim);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem;
   letter-spacing: 2px;
+}
+
+/* ── Hide default Swagger topbar (we have our own) ── */
+.swagger-ui .topbar { display: none !important; }
+
+/* ── RESET: all native <button> elements ── */
+.swagger-ui button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace !important;
+  color: var(--g-dim) !important;
+  padding: 0 !important;
+}
+
+/* ── Action buttons (.btn class) — styled explicitly ── */
+.swagger-ui .btn {
+  background: transparent !important;
+  border: 1px solid var(--g-dim) !important;
+  border-radius: 0 !important;
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 1px;
+  padding: 5px 14px !important;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+.swagger-ui .btn:hover {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.05) !important;
+}
+.swagger-ui .btn.execute {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.08) !important;
+}
+.swagger-ui .btn.execute:hover {
+  background: rgba(57,255,20,0.15) !important;
+}
+.swagger-ui .btn.cancel {
+  border-color: #993333 !important;
+  color: #ff5050 !important;
+}
+.swagger-ui .btn.cancel:hover {
+  background: rgba(255,50,50,0.06) !important;
+}
+.swagger-ui .btn.authorize {
+  border-color: var(--g-dim) !important;
+  color: var(--g-mid) !important;
+}
+
+/* Try it out button — not .btn class */
+.swagger-ui .try-out__btn {
+  border: 1px solid var(--g-mute) !important;
+  color: var(--g-dim) !important;
+  padding: 4px 12px !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.swagger-ui .try-out__btn:hover {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.05) !important;
+}
+.swagger-ui .try-out__btn.cancel {
+  border-color: #993333 !important;
+  color: #ff5050 !important;
 }
 
 /* ── Wrapper ── */
@@ -61,13 +152,13 @@ body::after {
 }
 .swagger-ui .info .title {
   font-family: 'VT323', monospace !important;
-  font-size: 2.6rem !important;
+  font-size: 2.4rem !important;
   color: var(--g-hi) !important;
   text-shadow: var(--glow) !important;
   letter-spacing: 3px;
   line-height: 1;
 }
-.swagger-ui .info .title span { display: none; }
+.swagger-ui .info .title small { display: none; }
 .swagger-ui .info p,
 .swagger-ui .info li { color: var(--g-dim) !important; font-size: 0.85rem !important; }
 .swagger-ui .info a { color: var(--g-mid) !important; }
@@ -94,7 +185,6 @@ body::after {
   letter-spacing: 3px;
   border-bottom: 1px solid var(--g-mute) !important;
   padding: 8px 4px !important;
-  text-shadow: none !important;
 }
 .swagger-ui .opblock-tag:hover { background: rgba(57,255,20,0.03) !important; }
 .swagger-ui .opblock-tag small { color: var(--g-dim) !important; font-size: 0.8rem !important; }
@@ -107,14 +197,12 @@ body::after {
   box-shadow: none !important;
   margin: 4px 0 !important;
 }
-.swagger-ui .opblock.is-open {
-  border-color: var(--g-dim) !important;
-}
+.swagger-ui .opblock.is-open { border-color: var(--g-dim) !important; }
+
 .swagger-ui .opblock .opblock-summary {
   background: transparent !important;
   border-bottom: none !important;
   padding: 8px 12px !important;
-  align-items: center !important;
 }
 .swagger-ui .opblock.is-open .opblock-summary {
   border-bottom: 1px solid var(--g-mute) !important;
@@ -122,16 +210,19 @@ body::after {
 
 /* Method badge */
 .swagger-ui .opblock-summary-method {
+  -webkit-appearance: none !important;
+  appearance: none !important;
   border-radius: 0 !important;
   font-family: 'Share Tech Mono', monospace !important;
   font-size: 0.75rem !important;
   font-weight: normal !important;
   letter-spacing: 1px;
-  min-width: 60px !important;
+  min-width: 62px !important;
   padding: 3px 6px !important;
   text-align: center;
   background: transparent !important;
   border: 1px solid currentColor !important;
+  box-shadow: none !important;
 }
 .swagger-ui .opblock.opblock-post   .opblock-summary-method { color: var(--g-hi) !important; }
 .swagger-ui .opblock.opblock-get    .opblock-summary-method { color: #00d4ff !important; }
@@ -139,28 +230,36 @@ body::after {
 .swagger-ui .opblock.opblock-put    .opblock-summary-method { color: #ffaa00 !important; }
 .swagger-ui .opblock.opblock-patch  .opblock-summary-method { color: #ff8c00 !important; }
 
-/* Path */
+/* Path + description */
 .swagger-ui .opblock-summary-path,
 .swagger-ui .opblock-summary-path__deprecated {
   color: var(--g-mid) !important;
   font-family: 'Share Tech Mono', monospace !important;
   font-size: 0.9rem !important;
-  text-shadow: none !important;
 }
-.swagger-ui .opblock-summary-path:hover { color: var(--g-hi) !important; }
-
-/* Description next to path */
 .swagger-ui .opblock-summary-description {
   color: var(--g-dim) !important;
   font-size: 0.8rem !important;
 }
 
+/* Expand arrow icon */
+.swagger-ui .opblock-summary-control {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.swagger-ui .arrow,
+.swagger-ui .expand-methods svg,
+.swagger-ui .expand-operation svg { fill: var(--g-dim) !important; }
+
+/* Copy icon */
+.swagger-ui .copy-to-clipboard { opacity: 0.25; }
+.swagger-ui .copy-to-clipboard:hover { opacity: 0.6; }
+
 /* ── Block body ── */
 .swagger-ui .opblock-body,
 .swagger-ui .opblock-description-wrapper,
-.swagger-ui .opblock-section-header {
-  background: var(--bg) !important;
-}
+.swagger-ui .opblock-section-header { background: var(--bg) !important; }
 .swagger-ui .opblock-section-header {
   border-bottom: 1px solid var(--g-mute) !important;
   box-shadow: none !important;
@@ -169,17 +268,13 @@ body::after {
 .swagger-ui .opblock-section-header h4,
 .swagger-ui .opblock-section-header label {
   color: var(--g-dim) !important;
-  font-size: 0.8rem !important;
+  font-size: 0.78rem !important;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-/* ── Parameters table ── */
-.swagger-ui .parameters-col_name { padding: 8px 12px !important; }
-.swagger-ui .parameter__name {
-  color: var(--g-mid) !important;
-  font-size: 0.85rem !important;
-}
+/* ── Parameters ── */
+.swagger-ui .parameter__name { color: var(--g-mid) !important; font-size: 0.85rem !important; }
 .swagger-ui .parameter__type,
 .swagger-ui .parameter__in { color: var(--g-dim) !important; font-size: 0.78rem !important; }
 .swagger-ui table thead tr th,
@@ -190,6 +285,7 @@ body::after {
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 6px 12px !important;
+  background: transparent !important;
 }
 .swagger-ui table tbody tr td {
   color: var(--g-mid) !important;
@@ -205,6 +301,8 @@ body::after {
 .swagger-ui input[type=search],
 .swagger-ui textarea,
 .swagger-ui select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
   background: #050505 !important;
   border: 1px solid var(--g-mute) !important;
   border-radius: 0 !important;
@@ -215,56 +313,15 @@ body::after {
   padding: 6px 8px !important;
 }
 .swagger-ui input:focus,
-.swagger-ui textarea:focus {
-  border-color: var(--g-dim) !important;
-  box-shadow: none !important;
-}
-
-/* ── Buttons ── */
-.swagger-ui .btn {
-  background: transparent !important;
-  border: 1px solid var(--g-dim) !important;
-  border-radius: 0 !important;
-  color: var(--g-mid) !important;
-  font-family: 'Share Tech Mono', monospace !important;
-  font-size: 0.78rem !important;
-  font-weight: normal !important;
-  letter-spacing: 1px;
-  padding: 5px 12px !important;
-  text-transform: uppercase;
-  box-shadow: none !important;
-  transition: all 0.1s;
-}
-.swagger-ui .btn:hover {
-  border-color: var(--g-mid) !important;
-  color: var(--g-hi) !important;
-  background: rgba(57,255,20,0.05) !important;
-  box-shadow: none !important;
-}
-.swagger-ui .btn.execute {
-  border-color: var(--g-mid) !important;
-  color: var(--g-hi) !important;
-  background: rgba(57,255,20,0.06) !important;
-}
-.swagger-ui .btn.execute:hover {
-  background: rgba(57,255,20,0.12) !important;
-}
-.swagger-ui .btn.cancel {
-  border-color: #993333 !important;
-  color: #ff5050 !important;
-}
-.swagger-ui .btn.cancel:hover { background: rgba(255,50,50,0.06) !important; }
+.swagger-ui textarea:focus { border-color: var(--g-dim) !important; }
 
 /* ── Responses ── */
 .swagger-ui .responses-inner h4,
-.swagger-ui .responses-inner h5 { color: var(--g-dim) !important; font-size: 0.78rem !important; letter-spacing: 1px; }
-.swagger-ui .response-col_status {
-  color: var(--g-mid) !important;
-  font-family: 'Share Tech Mono', monospace !important;
-  font-size: 0.85rem !important;
-}
-.swagger-ui .response-col_description { color: var(--g-dim) !important; }
+.swagger-ui .responses-inner h5 { color: var(--g-dim) !important; font-size: 0.78rem !important; }
+.swagger-ui .response-col_status { color: var(--g-mid) !important; font-size: 0.85rem !important; }
+.swagger-ui .response-col_description,
 .swagger-ui .response-col_links { color: var(--g-dim) !important; }
+.swagger-ui .response-col_links a { color: var(--g-mid) !important; }
 
 /* ── Code blocks ── */
 .swagger-ui .microlight,
@@ -279,13 +336,10 @@ body::after {
   font-size: 0.82rem !important;
 }
 
-/* ── Schemas section ── */
+/* ── Schemas section — hidden by default (defaultModelsExpandDepth: -1) ── */
 .swagger-ui section.models {
   border: 1px solid var(--g-mute) !important;
   background: var(--bg-alt) !important;
-}
-.swagger-ui section.models.is-open h4 {
-  border-bottom: 1px solid var(--g-mute) !important;
 }
 .swagger-ui section.models h4 {
   font-family: 'Share Tech Mono', monospace !important;
@@ -293,26 +347,17 @@ body::after {
   color: var(--g-mid) !important;
   letter-spacing: 1px;
   text-transform: uppercase;
+  border-bottom: none !important;
 }
-.swagger-ui section.models h5 { color: var(--g-mid) !important; font-size: 0.82rem !important; }
+.swagger-ui section.models.is-open h4 {
+  border-bottom: 1px solid var(--g-mute) !important;
+}
 .swagger-ui .model-box { background: var(--bg) !important; border: 1px solid var(--g-mute) !important; }
 .swagger-ui .model,
 .swagger-ui .model .property,
 .swagger-ui .model-title { color: var(--g-dim) !important; font-family: 'Share Tech Mono', monospace !important; font-size: 0.82rem !important; }
 .swagger-ui .prop-type   { color: #00aacc !important; }
-.swagger-ui .prop-format { color: var(--g-dim) !important; }
-
-/* Hide noisy "object" label in schema list */
-.swagger-ui .model-hint { display: none !important; }
-
-/* ── Icons / arrows ── */
-.swagger-ui .arrow { fill: var(--g-dim) !important; }
-.swagger-ui .expand-methods svg,
-.swagger-ui .expand-operation svg { fill: var(--g-dim) !important; }
-
-/* Copy icon — tone down */
-.swagger-ui .opblock-summary-path .copy-to-clipboard { opacity: 0.3; }
-.swagger-ui .opblock-summary-path .copy-to-clipboard:hover { opacity: 0.7; }
+.swagger-ui .model-hint  { display: none !important; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; height: 5px; background: #000; }
@@ -326,8 +371,15 @@ body::after {
   border-radius: 0 !important;
   box-shadow: none !important;
 }
-.swagger-ui .dialog-ux .modal-ux-header { border-bottom: 1px solid var(--g-mute) !important; background: var(--bg-alt) !important; }
-.swagger-ui .dialog-ux .modal-ux-header h3 { color: var(--g-hi) !important; font-family: 'VT323', monospace !important; font-size: 1.6rem !important; letter-spacing: 2px; }
+.swagger-ui .dialog-ux .modal-ux-header {
+  border-bottom: 1px solid var(--g-mute) !important;
+  background: var(--bg-alt) !important;
+}
+.swagger-ui .dialog-ux .modal-ux-header h3 {
+  color: var(--g-hi) !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 1.6rem !important;
+}
 
 /* ── Links ── */
 .swagger-ui a { color: var(--g-mid) !important; }
