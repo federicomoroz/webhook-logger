@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import Integer, String, Text, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column
-from database import Base
+from app.core.database import Base
 
 
 class Event(Base):
