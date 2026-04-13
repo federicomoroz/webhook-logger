@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --green:        #15ff00;
+  --green-dim:    #0a8f00;
+  --green-bright: #39ff14;
+  --bg:           #080808;
+  --bg-alt:       #0f110f;
+  --glow:         0 0 8px #15ff00, 0 0 2px #15ff00;
+  --glow-soft:    0 0 4px rgba(21,255,0,0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+  min-height: 100vh;
+}
+
+/* CRT scanlines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent, transparent 2px,
+    rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 10000;
+}
+
+/* CRT vignette */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);
+  pointer-events: none;
+  z-index: 10001;
+}
+
+/* ── Swagger wrapper ── */
+.swagger-ui {
+  font-family: 'Share Tech Mono', monospace !important;
+  background: var(--bg) !important;
+  color: var(--green) !important;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Top bar */
+.swagger-ui .topbar {
+  background: #000 !important;
+  border-bottom: 1px solid var(--green-dim) !important;
+  padding: 12px 20px !important;
+}
+.swagger-ui .topbar .download-url-wrapper { display: none; }
+.swagger-ui .topbar-wrapper img { display: none; }
+.swagger-ui .topbar-wrapper::before {
+  content: "ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM";
+  color: var(--green);
+  font-family: 'VT323', monospace;
+  font-size: 1.4rem;
+  text-shadow: var(--glow);
+  letter-spacing: 2px;
+}
+
+/* Info section */
+.swagger-ui .info {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--green-dim);
+  padding: 20px !important;
+  margin-bottom: 20px;
+}
+.swagger-ui .info .title {
+  color: var(--green-bright) !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 3rem !important;
+  text-shadow: var(--glow) !important;
+  letter-spacing: 3px;
+}
+.swagger-ui .info .title span { display: none; }
+.swagger-ui .info p,
+.swagger-ui .info li,
+.swagger-ui .info a { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .info .version {
+  background: transparent !important;
+  border: 1px solid var(--green) !important;
+  color: var(--green) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* Scheme container */
+.swagger-ui .scheme-container {
+  background: var(--bg-alt) !important;
+  border-bottom: 1px solid var(--green-dim) !important;
+  box-shadow: none !important;
+  padding: 10px 20px !important;
+}
+
+/* Operation tags */
+.swagger-ui .opblock-tag {
+  color: var(--green-bright) !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 1.6rem !important;
+  text-shadow: var(--glow-soft) !important;
+  border-bottom: 1px solid var(--green-dim) !important;
+  letter-spacing: 2px;
+}
+.swagger-ui .opblock-tag:hover { background: rgba(21,255,0,0.04) !important; }
+
+/* Operation blocks */
+.swagger-ui .opblock {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--green-dim) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 6px !important;
+}
+.swagger-ui .opblock.is-open {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 6px rgba(21,255,0,0.15) !important;
+}
+.swagger-ui .opblock .opblock-summary {
+  background: transparent !important;
+  border-bottom: 1px solid var(--green-dim) !important;
+}
+.swagger-ui .opblock .opblock-summary-path {
+  color: var(--green-bright) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  text-shadow: var(--glow-soft) !important;
+}
+.swagger-ui .opblock .opblock-summary-description {
+  color: var(--green-dim) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* HTTP method badges */
+.swagger-ui .opblock-summary-method {
+  background: transparent !important;
+  border: 1px solid currentColor !important;
+  border-radius: 0 !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 1rem !important;
+  letter-spacing: 1px;
+  min-width: 70px !important;
+  text-align: center;
+}
+.swagger-ui .opblock.opblock-post   .opblock-summary-method { color: #15ff00 !important; border-color: #15ff00 !important; }
+.swagger-ui .opblock.opblock-get    .opblock-summary-method { color: #00e5ff !important; border-color: #00e5ff !important; }
+.swagger-ui .opblock.opblock-delete .opblock-summary-method { color: #ff4444 !important; border-color: #ff4444 !important; }
+.swagger-ui .opblock.opblock-put    .opblock-summary-method { color: #ffaa00 !important; border-color: #ffaa00 !important; }
+.swagger-ui .opblock.opblock-patch  .opblock-summary-method { color: #ff8800 !important; border-color: #ff8800 !important; }
+
+/* Block body */
+.swagger-ui .opblock-body,
+.swagger-ui .opblock-description-wrapper,
+.swagger-ui .opblock-section-header { background: var(--bg) !important; }
+.swagger-ui .opblock-section-header h4,
+.swagger-ui .opblock-section-header label { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .opblock-section-header { border-bottom: 1px solid var(--green-dim) !important; box-shadow: none !important; }
+
+/* Parameters */
+.swagger-ui table thead tr th,
+.swagger-ui table thead tr td {
+  color: var(--green-bright) !important;
+  border-bottom: 1px solid var(--green-dim) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+.swagger-ui table tbody tr td {
+  color: var(--green) !important;
+  border-bottom: 1px solid rgba(21,255,0,0.08) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  background: transparent !important;
+}
+.swagger-ui .parameter__name { color: var(--green-bright) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .parameter__type { color: var(--green-dim) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .parameter__in   { color: var(--green-dim) !important; }
+
+/* Inputs */
+.swagger-ui input[type=text],
+.swagger-ui input[type=password],
+.swagger-ui input[type=search],
+.swagger-ui textarea,
+.swagger-ui select {
+  background: #0a0a0a !important;
+  border: 1px solid var(--green-dim) !important;
+  border-radius: 0 !important;
+  color: var(--green-bright) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  outline: none !important;
+}
+.swagger-ui input:focus,
+.swagger-ui textarea:focus {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 6px rgba(21,255,0,0.25) !important;
+}
+
+/* Buttons */
+.swagger-ui .btn {
+  background: transparent !important;
+  border: 1px solid var(--green) !important;
+  border-radius: 0 !important;
+  color: var(--green) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: none !important;
+}
+.swagger-ui .btn:hover { background: rgba(21,255,0,0.08) !important; box-shadow: var(--glow-soft) !important; }
+.swagger-ui .btn.execute { background: rgba(21,255,0,0.12) !important; border-color: var(--green-bright) !important; color: var(--green-bright) !important; }
+.swagger-ui .btn.execute:hover { background: rgba(21,255,0,0.22) !important; }
+.swagger-ui .btn.cancel { border-color: #ff4444 !important; color: #ff4444 !important; }
+
+/* Responses */
+.swagger-ui .responses-inner h4,
+.swagger-ui .responses-inner h5 { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .response-col_status { color: var(--green-bright) !important; font-family: 'VT323', monospace !important; font-size: 1.2rem !important; }
+.swagger-ui .response-col_description,
+.swagger-ui .response-col_links { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+
+/* Code blocks */
+.swagger-ui .microlight,
+.swagger-ui pre,
+.swagger-ui code,
+.swagger-ui .body-param__text {
+  background: #050505 !important;
+  border: 1px solid var(--green-dim) !important;
+  color: var(--green) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  border-radius: 0 !important;
+}
+
+/* Models */
+.swagger-ui section.models { border: 1px solid var(--green-dim) !important; }
+.swagger-ui section.models.is-open h4 { border-bottom: 1px solid var(--green-dim) !important; }
+.swagger-ui section.models h4 { color: var(--green-bright) !important; font-family: 'VT323', monospace !important; font-size: 1.4rem !important; }
+.swagger-ui .model-box { background: var(--bg-alt) !important; }
+.swagger-ui .model .property,
+.swagger-ui .model-title,
+.swagger-ui .model { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .prop-type   { color: #00e5ff !important; }
+.swagger-ui .prop-format { color: var(--green-dim) !important; }
+
+/* Icons */
+.swagger-ui .arrow,
+.swagger-ui .expand-methods svg,
+.swagger-ui .expand-operation svg { fill: var(--green) !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; background: #000; }
+::-webkit-scrollbar-thumb { background: var(--green-dim); }
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+/* Auth modal */
+.swagger-ui .dialog-ux .modal-ux {
+  background: var(--bg) !important;
+  border: 1px solid var(--green) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--glow-soft) !important;
+}
+.swagger-ui .dialog-ux .modal-ux-header { border-bottom: 1px solid var(--green-dim) !important; background: var(--bg-alt) !important; }
+.swagger-ui .dialog-ux .modal-ux-header h3 { color: var(--green-bright) !important; font-family: 'VT323', monospace !important; font-size: 1.8rem !important; }
+
+/* Misc */
+.swagger-ui .required { color: #ff4444 !important; }
+.swagger-ui a { color: var(--green) !important; }
+.swagger-ui a:hover { text-shadow: var(--glow-soft); }
+.swagger-ui .loading-container { background: var(--bg) !important; }
