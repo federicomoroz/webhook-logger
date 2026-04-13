@@ -316,9 +316,10 @@ _DOCS_HTML = """<!DOCTYPE html>
   <link rel="stylesheet" href="/static/terminal.css">
 </head>
 <body>
+  <div id="crt-scanlines"></div>
   <div id="docs-topbar">
     <a href="/" id="back-btn">&#8592; HOME</a>
-    <span id="docs-title">WEBHOOK LOGGER &nbsp;// &nbsp;FEDERICO MOROZ &nbsp;// &nbsp;v1.0</span>
+    <span id="docs-title">WEBHOOK LOGGER &nbsp;//&nbsp; FEDERICO MOROZ &nbsp;//&nbsp; v1.0</span>
   </div>
   <div id="swagger-ui"></div>
   <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
@@ -328,7 +329,7 @@ _DOCS_HTML = """<!DOCTYPE html>
         url: "/openapi.json",
         dom_id: "#swagger-ui",
         deepLinking: true,
-        presets: [SwaggerUIBundle.presets.apis],
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIBundle.SwaggerUIStandalonePreset],
         layout: "BaseLayout",
         defaultModelsExpandDepth: -1,
       });
