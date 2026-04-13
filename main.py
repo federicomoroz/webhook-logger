@@ -1,8 +1,8 @@
 import json
 import logging
-from typing import Any
+from typing import Annotated, Any
 
-from fastapi import FastAPI, Depends, HTTPException, Request, Query
+from fastapi import FastAPI, Depends, HTTPException, Request, Query, Path
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -311,7 +311,7 @@ async def custom_swagger_ui():
     tags=["Webhooks"],
 )
 async def receive_webhook(
-    source: str,
+    source: Annotated[str, Path(max_length=255)],
     request: Request,
     db: Session = Depends(get_db),
 ):
