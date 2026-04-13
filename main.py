@@ -66,22 +66,6 @@ _LANDING_HTML = """<!DOCTYPE html>
       font-family: 'Share Tech Mono', monospace;
       min-height: 100vh;
     }}
-    body::after {{
-      content: "";
-      position: fixed; inset: 0;
-      background: repeating-linear-gradient(to bottom,
-        transparent, transparent 2px,
-        rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
-      pointer-events: none;
-      z-index: 9999;
-    }}
-    body::before {{
-      content: "";
-      position: fixed; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);
-      pointer-events: none;
-      z-index: 9998;
-    }}
     .terminal {{
       max-width: 860px;
       margin: 0 auto;
@@ -316,7 +300,6 @@ _DOCS_HTML = """<!DOCTYPE html>
   <link rel="stylesheet" href="/static/terminal.css">
 </head>
 <body>
-  <div id="crt-scanlines"></div>
   <div id="docs-topbar">
     <a href="/" id="back-btn">&#8592; HOME</a>
     <span id="docs-title">WEBHOOK LOGGER &nbsp;//&nbsp; FEDERICO MOROZ &nbsp;//&nbsp; v1.0</span>
