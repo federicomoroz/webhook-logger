@@ -1,8 +1,10 @@
+import html
 import json
 import logging
 from typing import Annotated, Any
 
 from fastapi import FastAPI, Depends, HTTPException, Request, Query, Path
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -29,6 +31,13 @@ app = FastAPI(
     docs_url=None,
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET", "POST", "DELETE"],
+    allow_headers=["*"],
+)
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 RELEVANT_HEADER_PREFIXES = ("content-type", "user-agent", "x-")
@@ -38,7 +47,8 @@ _LANDING_HTML = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEBHOOK LOGGER // ROBCO INDUSTRIES</title>
+  <title>WEBHOOK LOGGER // FEDERICO MOROZ</title>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root {{
@@ -284,9 +294,10 @@ def landing_page(db: Session = Depends(get_db)):
         max_count = rows[0].count
         for r in rows:
             bar = "█" * int((r.count / max_count) * 18)
+            safe_source = html.escape(r.source)
             stats_html += (
                 f'<div class="stat-row">'
-                f'<span class="stat-name">{r.source}</span>'
+                f'<span class="stat-name">{safe_source}</span>'
                 f'<span class="stat-right"><span class="stat-bar">{bar}</span> {r.count}</span>'
                 f'</div>'
             )
@@ -300,6 +311,7 @@ async def custom_swagger_ui():
         openapi_url="/openapi.json",
         title="WEBHOOK LOGGER // FEDERICO MOROZ",
         swagger_css_url="/static/terminal.css",
+        swagger_favicon_url="/static/favicon.svg",
     )
 
 
