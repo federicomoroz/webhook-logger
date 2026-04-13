@@ -153,7 +153,7 @@ LANDING_HTML = """<!DOCTYPE html>
 
   <div class="stats-box">
     <div class="section-title">&gt; EVENT LOG STATISTICS</div>
-    {{stats_html}}
+    {stats_html}
   </div>
 
   <div class="endpoints-section">

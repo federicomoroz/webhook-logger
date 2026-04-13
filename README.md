@@ -6,6 +6,8 @@ Built as a portfolio project to demonstrate: layered architecture, SOLID princip
 
 **Live demo:** https://webhook-logger-9paz.onrender.com
 
+![Landing page](docs/screenshot.jpg)
+
 ---
 
 ## What it does
