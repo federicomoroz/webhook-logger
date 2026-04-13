@@ -1,274 +1,334 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --green:        #15ff00;
-  --green-dim:    #0a8f00;
-  --green-bright: #39ff14;
-  --bg:           #080808;
-  --bg-alt:       #0f110f;
-  --glow:         0 0 8px #15ff00, 0 0 2px #15ff00;
-  --glow-soft:    0 0 4px rgba(21,255,0,0.5);
+  --g-hi:   #39ff14;   /* titles, active */
+  --g-mid:  #20c020;   /* paths, values  */
+  --g-dim:  #147814;   /* descriptions, labels */
+  --g-mute: #0d500d;   /* borders, dividers */
+  --bg:     #080808;
+  --bg-alt: #0c0f0c;
+  --glow:   0 0 10px #39ff1466, 0 0 2px #39ff1488;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; }
 
 html, body {
   background: var(--bg);
-  color: var(--green);
   font-family: 'Share Tech Mono', 'Courier New', monospace !important;
-  min-height: 100vh;
 }
 
-/* CRT scanlines */
+/* CRT scanlines — subtle */
 body::after {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: repeating-linear-gradient(
-    to bottom,
-    transparent, transparent 2px,
-    rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px
+    to bottom, transparent 0px, transparent 3px,
+    rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px
   );
   pointer-events: none;
   z-index: 10000;
 }
 
-/* CRT vignette */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);
-  pointer-events: none;
-  z-index: 10001;
+/* ── Top bar ── */
+.swagger-ui .topbar {
+  background: #000 !important;
+  border-bottom: 1px solid var(--g-mute) !important;
+  padding: 10px 24px !important;
+}
+.swagger-ui .topbar .download-url-wrapper { display: none !important; }
+.swagger-ui .topbar-wrapper img { display: none !important; }
+.swagger-ui .topbar-wrapper::before {
+  content: "ROBCO INDUSTRIES  //  WEBHOOK LOGGER  //  v1.0";
+  color: var(--g-mid);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
 }
 
-/* ── Swagger wrapper ── */
+/* ── Wrapper ── */
 .swagger-ui {
   font-family: 'Share Tech Mono', monospace !important;
   background: var(--bg) !important;
-  color: var(--green) !important;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px;
+  color: var(--g-mid) !important;
 }
 
-/* Top bar */
-.swagger-ui .topbar {
-  background: #000 !important;
-  border-bottom: 1px solid var(--green-dim) !important;
-  padding: 12px 20px !important;
-}
-.swagger-ui .topbar .download-url-wrapper { display: none; }
-.swagger-ui .topbar-wrapper img { display: none; }
-.swagger-ui .topbar-wrapper::before {
-  content: "ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM";
-  color: var(--green);
-  font-family: 'VT323', monospace;
-  font-size: 1.4rem;
-  text-shadow: var(--glow);
-  letter-spacing: 2px;
-}
-
-/* Info section */
+/* ── Info block ── */
 .swagger-ui .info {
   background: var(--bg-alt) !important;
-  border: 1px solid var(--green-dim);
-  padding: 20px !important;
-  margin-bottom: 20px;
+  border: 1px solid var(--g-mute) !important;
+  padding: 24px 28px !important;
+  margin-bottom: 16px;
 }
 .swagger-ui .info .title {
-  color: var(--green-bright) !important;
   font-family: 'VT323', monospace !important;
-  font-size: 3rem !important;
+  font-size: 2.6rem !important;
+  color: var(--g-hi) !important;
   text-shadow: var(--glow) !important;
   letter-spacing: 3px;
+  line-height: 1;
 }
 .swagger-ui .info .title span { display: none; }
 .swagger-ui .info p,
-.swagger-ui .info li,
-.swagger-ui .info a { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .info li { color: var(--g-dim) !important; font-size: 0.85rem !important; }
+.swagger-ui .info a { color: var(--g-mid) !important; }
 .swagger-ui .info .version {
   background: transparent !important;
-  border: 1px solid var(--green) !important;
-  color: var(--green) !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  border: 1px solid var(--g-mute) !important;
+  color: var(--g-dim) !important;
+  font-size: 0.75rem !important;
 }
 
-/* Scheme container */
+/* ── Scheme container ── */
 .swagger-ui .scheme-container {
   background: var(--bg-alt) !important;
-  border-bottom: 1px solid var(--green-dim) !important;
+  border-bottom: 1px solid var(--g-mute) !important;
   box-shadow: none !important;
-  padding: 10px 20px !important;
+  padding: 8px 24px !important;
 }
 
-/* Operation tags */
+/* ── Tags (section headers) ── */
 .swagger-ui .opblock-tag {
-  color: var(--green-bright) !important;
   font-family: 'VT323', monospace !important;
-  font-size: 1.6rem !important;
-  text-shadow: var(--glow-soft) !important;
-  border-bottom: 1px solid var(--green-dim) !important;
-  letter-spacing: 2px;
+  font-size: 1.5rem !important;
+  color: var(--g-hi) !important;
+  letter-spacing: 3px;
+  border-bottom: 1px solid var(--g-mute) !important;
+  padding: 8px 4px !important;
+  text-shadow: none !important;
 }
-.swagger-ui .opblock-tag:hover { background: rgba(21,255,0,0.04) !important; }
+.swagger-ui .opblock-tag:hover { background: rgba(57,255,20,0.03) !important; }
+.swagger-ui .opblock-tag small { color: var(--g-dim) !important; font-size: 0.8rem !important; }
 
-/* Operation blocks */
+/* ── Operation blocks ── */
 .swagger-ui .opblock {
   background: var(--bg-alt) !important;
-  border: 1px solid var(--green-dim) !important;
+  border: 1px solid var(--g-mute) !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  margin-bottom: 6px !important;
+  margin: 4px 0 !important;
 }
 .swagger-ui .opblock.is-open {
-  border-color: var(--green) !important;
-  box-shadow: 0 0 6px rgba(21,255,0,0.15) !important;
+  border-color: var(--g-dim) !important;
 }
 .swagger-ui .opblock .opblock-summary {
   background: transparent !important;
-  border-bottom: 1px solid var(--green-dim) !important;
+  border-bottom: none !important;
+  padding: 8px 12px !important;
+  align-items: center !important;
 }
-.swagger-ui .opblock .opblock-summary-path {
-  color: var(--green-bright) !important;
-  font-family: 'Share Tech Mono', monospace !important;
-  text-shadow: var(--glow-soft) !important;
-}
-.swagger-ui .opblock .opblock-summary-description {
-  color: var(--green-dim) !important;
-  font-family: 'Share Tech Mono', monospace !important;
+.swagger-ui .opblock.is-open .opblock-summary {
+  border-bottom: 1px solid var(--g-mute) !important;
 }
 
-/* HTTP method badges */
+/* Method badge */
 .swagger-ui .opblock-summary-method {
+  border-radius: 0 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: normal !important;
+  letter-spacing: 1px;
+  min-width: 60px !important;
+  padding: 3px 6px !important;
+  text-align: center;
   background: transparent !important;
   border: 1px solid currentColor !important;
-  border-radius: 0 !important;
-  font-family: 'VT323', monospace !important;
-  font-size: 1rem !important;
-  letter-spacing: 1px;
-  min-width: 70px !important;
-  text-align: center;
 }
-.swagger-ui .opblock.opblock-post   .opblock-summary-method { color: #15ff00 !important; border-color: #15ff00 !important; }
-.swagger-ui .opblock.opblock-get    .opblock-summary-method { color: #00e5ff !important; border-color: #00e5ff !important; }
-.swagger-ui .opblock.opblock-delete .opblock-summary-method { color: #ff4444 !important; border-color: #ff4444 !important; }
-.swagger-ui .opblock.opblock-put    .opblock-summary-method { color: #ffaa00 !important; border-color: #ffaa00 !important; }
-.swagger-ui .opblock.opblock-patch  .opblock-summary-method { color: #ff8800 !important; border-color: #ff8800 !important; }
+.swagger-ui .opblock.opblock-post   .opblock-summary-method { color: var(--g-hi) !important; }
+.swagger-ui .opblock.opblock-get    .opblock-summary-method { color: #00d4ff !important; }
+.swagger-ui .opblock.opblock-delete .opblock-summary-method { color: #ff5050 !important; }
+.swagger-ui .opblock.opblock-put    .opblock-summary-method { color: #ffaa00 !important; }
+.swagger-ui .opblock.opblock-patch  .opblock-summary-method { color: #ff8c00 !important; }
 
-/* Block body */
+/* Path */
+.swagger-ui .opblock-summary-path,
+.swagger-ui .opblock-summary-path__deprecated {
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.9rem !important;
+  text-shadow: none !important;
+}
+.swagger-ui .opblock-summary-path:hover { color: var(--g-hi) !important; }
+
+/* Description next to path */
+.swagger-ui .opblock-summary-description {
+  color: var(--g-dim) !important;
+  font-size: 0.8rem !important;
+}
+
+/* ── Block body ── */
 .swagger-ui .opblock-body,
 .swagger-ui .opblock-description-wrapper,
-.swagger-ui .opblock-section-header { background: var(--bg) !important; }
+.swagger-ui .opblock-section-header {
+  background: var(--bg) !important;
+}
+.swagger-ui .opblock-section-header {
+  border-bottom: 1px solid var(--g-mute) !important;
+  box-shadow: none !important;
+  padding: 8px 12px !important;
+}
 .swagger-ui .opblock-section-header h4,
-.swagger-ui .opblock-section-header label { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
-.swagger-ui .opblock-section-header { border-bottom: 1px solid var(--green-dim) !important; box-shadow: none !important; }
+.swagger-ui .opblock-section-header label {
+  color: var(--g-dim) !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
-/* Parameters */
+/* ── Parameters table ── */
+.swagger-ui .parameters-col_name { padding: 8px 12px !important; }
+.swagger-ui .parameter__name {
+  color: var(--g-mid) !important;
+  font-size: 0.85rem !important;
+}
+.swagger-ui .parameter__type,
+.swagger-ui .parameter__in { color: var(--g-dim) !important; font-size: 0.78rem !important; }
 .swagger-ui table thead tr th,
 .swagger-ui table thead tr td {
-  color: var(--green-bright) !important;
-  border-bottom: 1px solid var(--green-dim) !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  color: var(--g-dim) !important;
+  border-bottom: 1px solid var(--g-mute) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 12px !important;
 }
 .swagger-ui table tbody tr td {
-  color: var(--green) !important;
-  border-bottom: 1px solid rgba(21,255,0,0.08) !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  color: var(--g-mid) !important;
+  border-bottom: 1px solid rgba(20,120,20,0.15) !important;
   background: transparent !important;
+  padding: 6px 12px !important;
 }
-.swagger-ui .parameter__name { color: var(--green-bright) !important; font-family: 'Share Tech Mono', monospace !important; }
-.swagger-ui .parameter__type { color: var(--green-dim) !important; font-family: 'Share Tech Mono', monospace !important; }
-.swagger-ui .parameter__in   { color: var(--green-dim) !important; }
+.swagger-ui .required { color: #ff5050 !important; }
 
-/* Inputs */
+/* ── Inputs ── */
 .swagger-ui input[type=text],
 .swagger-ui input[type=password],
 .swagger-ui input[type=search],
 .swagger-ui textarea,
 .swagger-ui select {
-  background: #0a0a0a !important;
-  border: 1px solid var(--green-dim) !important;
+  background: #050505 !important;
+  border: 1px solid var(--g-mute) !important;
   border-radius: 0 !important;
-  color: var(--green-bright) !important;
+  color: var(--g-mid) !important;
   font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.85rem !important;
   outline: none !important;
+  padding: 6px 8px !important;
 }
 .swagger-ui input:focus,
 .swagger-ui textarea:focus {
-  border-color: var(--green) !important;
-  box-shadow: 0 0 6px rgba(21,255,0,0.25) !important;
-}
-
-/* Buttons */
-.swagger-ui .btn {
-  background: transparent !important;
-  border: 1px solid var(--green) !important;
-  border-radius: 0 !important;
-  color: var(--green) !important;
-  font-family: 'Share Tech Mono', monospace !important;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  border-color: var(--g-dim) !important;
   box-shadow: none !important;
 }
-.swagger-ui .btn:hover { background: rgba(21,255,0,0.08) !important; box-shadow: var(--glow-soft) !important; }
-.swagger-ui .btn.execute { background: rgba(21,255,0,0.12) !important; border-color: var(--green-bright) !important; color: var(--green-bright) !important; }
-.swagger-ui .btn.execute:hover { background: rgba(21,255,0,0.22) !important; }
-.swagger-ui .btn.cancel { border-color: #ff4444 !important; color: #ff4444 !important; }
 
-/* Responses */
+/* ── Buttons ── */
+.swagger-ui .btn {
+  background: transparent !important;
+  border: 1px solid var(--g-dim) !important;
+  border-radius: 0 !important;
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.78rem !important;
+  font-weight: normal !important;
+  letter-spacing: 1px;
+  padding: 5px 12px !important;
+  text-transform: uppercase;
+  box-shadow: none !important;
+  transition: all 0.1s;
+}
+.swagger-ui .btn:hover {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.05) !important;
+  box-shadow: none !important;
+}
+.swagger-ui .btn.execute {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.06) !important;
+}
+.swagger-ui .btn.execute:hover {
+  background: rgba(57,255,20,0.12) !important;
+}
+.swagger-ui .btn.cancel {
+  border-color: #993333 !important;
+  color: #ff5050 !important;
+}
+.swagger-ui .btn.cancel:hover { background: rgba(255,50,50,0.06) !important; }
+
+/* ── Responses ── */
 .swagger-ui .responses-inner h4,
-.swagger-ui .responses-inner h5 { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
-.swagger-ui .response-col_status { color: var(--green-bright) !important; font-family: 'VT323', monospace !important; font-size: 1.2rem !important; }
-.swagger-ui .response-col_description,
-.swagger-ui .response-col_links { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
+.swagger-ui .responses-inner h5 { color: var(--g-dim) !important; font-size: 0.78rem !important; letter-spacing: 1px; }
+.swagger-ui .response-col_status {
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.85rem !important;
+}
+.swagger-ui .response-col_description { color: var(--g-dim) !important; }
+.swagger-ui .response-col_links { color: var(--g-dim) !important; }
 
-/* Code blocks */
+/* ── Code blocks ── */
 .swagger-ui .microlight,
 .swagger-ui pre,
 .swagger-ui code,
 .swagger-ui .body-param__text {
-  background: #050505 !important;
-  border: 1px solid var(--green-dim) !important;
-  color: var(--green) !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  background: #030503 !important;
+  border: 1px solid var(--g-mute) !important;
   border-radius: 0 !important;
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.82rem !important;
 }
 
-/* Models */
-.swagger-ui section.models { border: 1px solid var(--green-dim) !important; }
-.swagger-ui section.models.is-open h4 { border-bottom: 1px solid var(--green-dim) !important; }
-.swagger-ui section.models h4 { color: var(--green-bright) !important; font-family: 'VT323', monospace !important; font-size: 1.4rem !important; }
-.swagger-ui .model-box { background: var(--bg-alt) !important; }
+/* ── Schemas section ── */
+.swagger-ui section.models {
+  border: 1px solid var(--g-mute) !important;
+  background: var(--bg-alt) !important;
+}
+.swagger-ui section.models.is-open h4 {
+  border-bottom: 1px solid var(--g-mute) !important;
+}
+.swagger-ui section.models h4 {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.85rem !important;
+  color: var(--g-mid) !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.swagger-ui section.models h5 { color: var(--g-mid) !important; font-size: 0.82rem !important; }
+.swagger-ui .model-box { background: var(--bg) !important; border: 1px solid var(--g-mute) !important; }
+.swagger-ui .model,
 .swagger-ui .model .property,
-.swagger-ui .model-title,
-.swagger-ui .model { color: var(--green) !important; font-family: 'Share Tech Mono', monospace !important; }
-.swagger-ui .prop-type   { color: #00e5ff !important; }
-.swagger-ui .prop-format { color: var(--green-dim) !important; }
+.swagger-ui .model-title { color: var(--g-dim) !important; font-family: 'Share Tech Mono', monospace !important; font-size: 0.82rem !important; }
+.swagger-ui .prop-type   { color: #00aacc !important; }
+.swagger-ui .prop-format { color: var(--g-dim) !important; }
 
-/* Icons */
-.swagger-ui .arrow,
+/* Hide noisy "object" label in schema list */
+.swagger-ui .model-hint { display: none !important; }
+
+/* ── Icons / arrows ── */
+.swagger-ui .arrow { fill: var(--g-dim) !important; }
 .swagger-ui .expand-methods svg,
-.swagger-ui .expand-operation svg { fill: var(--green) !important; }
+.swagger-ui .expand-operation svg { fill: var(--g-dim) !important; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; background: #000; }
-::-webkit-scrollbar-thumb { background: var(--green-dim); }
-::-webkit-scrollbar-thumb:hover { background: var(--green); }
+/* Copy icon — tone down */
+.swagger-ui .opblock-summary-path .copy-to-clipboard { opacity: 0.3; }
+.swagger-ui .opblock-summary-path .copy-to-clipboard:hover { opacity: 0.7; }
 
-/* Auth modal */
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; background: #000; }
+::-webkit-scrollbar-thumb { background: var(--g-mute); }
+::-webkit-scrollbar-thumb:hover { background: var(--g-dim); }
+
+/* ── Auth modal ── */
 .swagger-ui .dialog-ux .modal-ux {
   background: var(--bg) !important;
-  border: 1px solid var(--green) !important;
+  border: 1px solid var(--g-dim) !important;
   border-radius: 0 !important;
-  box-shadow: var(--glow-soft) !important;
+  box-shadow: none !important;
 }
-.swagger-ui .dialog-ux .modal-ux-header { border-bottom: 1px solid var(--green-dim) !important; background: var(--bg-alt) !important; }
-.swagger-ui .dialog-ux .modal-ux-header h3 { color: var(--green-bright) !important; font-family: 'VT323', monospace !important; font-size: 1.8rem !important; }
+.swagger-ui .dialog-ux .modal-ux-header { border-bottom: 1px solid var(--g-mute) !important; background: var(--bg-alt) !important; }
+.swagger-ui .dialog-ux .modal-ux-header h3 { color: var(--g-hi) !important; font-family: 'VT323', monospace !important; font-size: 1.6rem !important; letter-spacing: 2px; }
 
-/* Misc */
-.swagger-ui .required { color: #ff4444 !important; }
-.swagger-ui a { color: var(--green) !important; }
-.swagger-ui a:hover { text-shadow: var(--glow-soft); }
-.swagger-ui .loading-container { background: var(--bg) !important; }
+/* ── Links ── */
+.swagger-ui a { color: var(--g-mid) !important; }
+.swagger-ui a:hover { color: var(--g-hi) !important; }
